@@ -17,7 +17,7 @@ This project is built using HTML, CSS, SCSS, and Bootstrap to ensure a responsiv
 
 ## Website Structure
 
-- **Homepage:** Introduction to ABC Construction, highlighting its expertise and portfolio.
+- **Homepage:** Introduction to a Construction company, highlighting its expertise and portfolio.
 - **Residential Projects:** Detailed descriptions and visuals of residential projects.
 - **Commercial Projects:** Showcases of successful commercial ventures.
 - **Services:** Comprehensive list of services offered.
