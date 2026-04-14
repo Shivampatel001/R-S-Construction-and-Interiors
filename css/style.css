@@ -1,12 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
 :root {
   --yellow:#f5bf23;
+  /* orange accent for logo highlights */
+  --accent:#ff7a00;
   --black:#111;
   --white:#fff;
   --light-color:#666;
   --light-bg:#eee;
   --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
   --border:.1rem solid rgba(0,0,0,.3);
+}
+
+/* accessibility helper: visually hidden but available to screen readers */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
 }
 
 * {
@@ -112,8 +123,25 @@ section {
   text-transform: capitalize;
 }
 
-.header .logo span {
-  color: var(--yellow);
+.header .logo .highlight {
+  color: var(--accent);
+  /* slightly smaller than the main logo text */
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+/* wrap the second line of the logo ("and Interiors") and make it block-level */
+.header .logo .subline {
+  display: block;
+  line-height: 1;
+}
+
+/* keep the word 'and' in default/black color */
+.header .logo .subline .and {
+  /* use the same orange accent as the highlighted words */
+  color: var(--accent);
+  font-size: 2rem;
+  font-weight: 600;
 }
 
 .header .navbar a {
@@ -769,15 +797,21 @@ section {
 
 .contact .row .map {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 41rem;
-          flex: 1 1 41rem;
+      -ms-flex: 1 1 50rem;
+          flex: 1 1 50rem;
   width: 100%;
+}
+
+.contact .row .map iframe {
+  width: 100%;
+  min-height: 44rem; /* make the embedded map taller */
+  border: 0;
 }
 
 .contact .row form {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 41rem;
-          flex: 1 1 41rem;
+      -ms-flex: 1 1 50rem;
+          flex: 1 1 50rem;
   background: var(--white);
   padding: 2rem;
 }
@@ -804,6 +838,203 @@ section {
 .contact .row form textarea {
   height: 15rem;
   resize: none;
+}
+
+/* Contact card (replaces the form) */
+.contact .row .contact-card {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 50rem;
+          flex: 1 1 50rem;
+  background: var(--white);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact .row .contact-card h3 {
+  font-size: 2.5rem;
+  color: var(--black);
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+}
+
+.contact .row .contact-card .card-body h4 {
+  font-size: 1.8rem;
+  color: var(--black);
+  margin-bottom: .8rem;
+}
+
+.contact .row .contact-card .card-body p {
+  font-size: 1.6rem;
+  color: var(--light-color);
+  line-height: 2;
+  margin: .4rem 0;
+}
+
+.contact .row .contact-card a {
+  color: var(--black);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.contact .row .contact-card a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* Enhanced contact card styling */
+.contact .row .contact-card {
+  border-radius: .8rem;
+  overflow: hidden;
+  -webkit-transition: transform .18s ease, box-shadow .18s ease;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.contact .row .contact-card:hover {
+  -webkit-transform: translateY(-6px);
+          transform: translateY(-6px);
+  -webkit-box-shadow: 0 1.5rem 2.5rem rgba(0,0,0,.12);
+          box-shadow: 0 1.5rem 2.5rem rgba(0,0,0,.12);
+}
+
+.contact-card-header {
+  /* make header area neutral and center contents; the heading itself becomes the oval */
+  background: transparent;
+  color: inherit;
+  padding: 2.2rem 3rem 1.6rem 3rem;
+  text-align: center;
+}
+
+.contact-card-header h3 {
+  margin: 0 auto;
+  font-size: 2.8rem;
+  display: inline-block;
+  /* oval/pill background for the heading */
+  background: linear-gradient(90deg, var(--accent), #ff9a3c);
+  color: #fff;
+  padding: .8rem 2.6rem;
+  border-radius: 999px;
+}
+
+.contact-card-header .subtitle {
+  margin-top: .9rem;
+  font-size: 1.4rem;
+  opacity: .95;
+  color: #333;
+}
+
+.contact .row .contact-card .card-body {
+  padding: 2rem 3rem 3rem 3rem;
+}
+
+.contact-person {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.contact-person .avatar {
+  height: 5.2rem;
+  width: 5.2rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffd28a, var(--accent));
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-weight: 700;
+  color: #3b2a14;
+}
+
+.person-info .name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.person-info .role {
+  font-size: 1.3rem;
+  color: var(--light-color);
+}
+
+.person-info .phone {
+  display: inline-block;
+  margin: .2rem 0;
+  color: var(--black);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.btn.small {
+  padding: .6rem 1.2rem;
+  font-size: 1.4rem;
+}
+
+.contact-email {
+  margin: 1rem 0 1.6rem 0;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  color: var(--light-color);
+}
+
+.contact-cta {
+  display: flex;
+  gap: 1rem;
+  margin-top: .8rem;
+}
+
+.btn.outline {
+  background: transparent;
+  color: var(--black);
+  border: .2rem solid var(--black);
+}
+
+.btn.outline:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* Contact-card button colors */
+.contact .row .contact-card .btn {
+  /* 'Send Email' primary CTA */
+  background: var(--accent);
+  color: #fff;
+}
+
+.contact .row .contact-card .btn:hover {
+  opacity: .95;
+}
+
+.contact .row .contact-card .btn.small {
+  /* 'Call' buttons (smaller) - icon centered */
+  background: var(--yellow);
+  color: var(--black);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .9rem 1.1rem;
+  font-size: 1.8rem;
+  border-radius: .8rem;
+  width: 4.4rem;
+  height: 4.4rem;
+}
+
+.contact .row .contact-card .btn.small i {
+  line-height: 1;
+}
+
+.contact .row .contact-card .btn.small:hover {
+  background: #ffd84d;
 }
 
 .blogs {
@@ -952,6 +1183,246 @@ section {
   }
 }
 
+/* ---------------- Glassmorphism theme overrides ---------------- */
+/* Purpose: give site a modern, glassy look while preserving layout and colors */
+body {
+  background: linear-gradient(180deg, #f7fbff 0%, #eef6fb 60%);
+  color: rgba(17,17,17,0.92);
+}
+
+/* Glass header */
+.header {
+  background: rgba(255,255,255,0.36) !important;
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  border-bottom: 1px solid rgba(255,255,255,0.45);
+  box-shadow: 0 8px 30px rgba(11,18,31,0.06);
+}
+.header .logo { color: rgba(10,10,10,0.95); }
+
+/* Soft translucent nav items */
+.header .navbar a {
+  background: rgba(255,255,255,0.06);
+  padding: .6rem 1rem;
+  border-radius: .6rem;
+}
+.header .navbar a:hover {
+  background: linear-gradient(90deg, rgba(255,122,0,0.95), rgba(245,191,35,0.95));
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(255,122,0,0.12);
+}
+
+/* Buttons: glassy primary and soft outline */
+.btn {
+  border-radius: 1rem;
+  padding: 1rem 2.4rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, rgba(255,122,0,0.98), rgba(245,191,35,0.98));
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(17,17,17,0.08);
+}
+.btn.outline {
+  background: rgba(255,255,255,0.14);
+  color: rgba(17,17,17,0.9);
+  border: 1px solid rgba(255,255,255,0.28);
+  box-shadow: none;
+}
+.btn:hover { transform: translateY(-3px); }
+
+/* Make cards translucent with blur */
+.box, .pricing .box, .services .box, .projects .box .image, .contact .row .contact-card, .contact-card .card-body {
+  background: rgba(255,255,255,0.52);
+  border: 1px solid rgba(255,255,255,0.45);
+  backdrop-filter: blur(6px) saturate(120%);
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  box-shadow: 0 12px 30px rgba(11,18,31,0.06);
+}
+.pricing .box { padding: 3rem 2rem; border-radius: 1rem; }
+.pricing .box:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(11,18,31,0.09); }
+
+/* Project image: keep image but add soft rounded glass container */
+.projects .box .image img { display:block; width:100%; height:100%; object-fit:cover; }
+.projects .box .content { background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.45)); }
+
+/* Contact card header pill: slightly stronger glass */
+.contact-card-header h3 {
+  background: linear-gradient(90deg, rgba(255,122,0,0.95), rgba(255,154,60,0.95));
+  color: #fff;
+  padding: .8rem 2.4rem;
+  border-radius: 999px;
+}
+
+/* Make avatars softer */
+.contact-person .avatar { background: linear-gradient(135deg, rgba(255,122,0,0.12), rgba(245,191,35,0.12)); color: rgba(17,17,17,0.9); border-radius: .8rem; }
+
+/* Footer: translucent dark glass */
+.footer {
+  background: linear-gradient(180deg, rgba(15,23,32,0.85), rgba(15,23,32,0.92));
+  color: #e6eef8;
+  padding: 3rem 0;
+}
+.footer .links .btn { background: transparent; border: 1px solid rgba(255,255,255,0.06); color: rgba(255,255,255,0.9); }
+
+/* Ensure headings remain readable */
+.heading { color: rgba(10,10,10,0.92); }
+
+@media (max-width: 768px) {
+  .header { padding: 1rem 1.2rem; }
+  .box, .pricing .box { background: rgba(255,255,255,0.6); }
+}
+
+/* end glassmorphism overrides */
+
+/* ---------- Visual polish: modern, catchy but professional ---------- */
+body {
+  background: linear-gradient(180deg,#fbfcfd,#f6f8fa);
+  color: #111;
+}
+
+/* Glassy sticky header */
+.header {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(0,0,0,.04);
+}
+.header .logo {
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+.header .navbar a {
+  padding: .6rem 1rem;
+  border-radius: .6rem;
+  transition: .18s ease;
+}
+.header .navbar a:hover {
+  background: linear-gradient(90deg,var(--accent), #ff9a3c);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(255,122,0,.12);
+}
+
+/* Softer, modern buttons */
+.btn {
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(17,17,17,.06);
+  padding: 1rem 2.4rem;
+  transition: transform .18s ease, box-shadow .18s ease, opacity .12s ease;
+}
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(17,17,17,.09);
+}
+.btn.outline {
+  background: transparent;
+  border: 1px solid rgba(17,17,17,.06);
+}
+
+/* Pricing cards: center, lift on hover, larger icon/price */
+.pricing .box {
+  text-align: center;
+  padding: 3.2rem 2rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 8px 30px rgba(25,25,25,.06);
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.pricing .box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 50px rgba(25,25,25,.08);
+}
+.pricing .box i {
+  display: block;
+  font-size: 3.6rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+.pricing .box .price {
+  font-size: 3.4rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin: .6rem 0 1rem 0;
+}
+.pricing .box .list p { color: #444; font-size: 1.4rem; }
+
+/* Projects: image cards with subtle overlay and title bar */
+.projects .box {
+  position: relative;
+  overflow: visible;
+}
+.projects .box .image {
+  border-radius: .8rem;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,.06);
+}
+.projects .box .content {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  background: linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.45));
+  color: #fff;
+  padding: .8rem 1rem;
+  border-radius: .6rem;
+}
+
+/* Filters for portfolio */
+.projects-filters {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.projects-filters .filter-btn {
+  padding: .7rem 1.2rem;
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  border-radius: .6rem;
+  cursor: pointer;
+  font-size: 1.4rem;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.projects-filters .filter-btn.active,
+.projects-filters .filter-btn:hover {
+  background: linear-gradient(90deg, var(--accent), #ff9a3c);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(255,122,0,0.12);
+}
+
+/* Slightly tighter grid for portfolio */
+.projects .box-container {
+  grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+  gap: 2.4rem;
+}
+
+/* Contact card: stronger elevation and softer rounding */
+.contact .row .contact-card {
+  border-radius: 1rem;
+  box-shadow: 0 18px 40px rgba(11,18,31,.06);
+  overflow: hidden;
+}
+.contact .row .contact-card .card-body { padding-top: 1.4rem; }
+
+/* small call icon button tweak: circle on very small screens */
+@media (max-width:480px){
+  .contact .row .contact-card .btn.small { width: 4.8rem; height:4.8rem; }
+}
+
+/* Footer: darker, compact and centered */
+.footer {
+  background: #0f1720;
+  color: #e6eef8;
+  padding: 3.2rem 0;
+}
+.footer .links .btn { background: transparent; border: 1px solid rgba(230,238,248,.06); color: #cfe8ff; }
+.footer .credit { color: #dbeafe; }
+.footer .credit span { color: var(--accent); }
+
+/* small responsive tweaks */
+@media (max-width: 640px) {
+  .pricing .box { padding: 2.4rem 1.2rem; }
+  .pricing .box i { font-size: 2.8rem; }
+}
+
+/* end visual polish */
+
 @media (max-width: 450px) {
   html {
     font-size: 50%;
@@ -960,4 +1431,155 @@ section {
     font-size: 2.5rem;
   }
 }
+/* Offerings (replacement for Blogs) */
+.offerings { background: var(--light-bg); }
+.offerings .heading { color: var(--black); }
+.offerings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 2rem;
+  align-items: stretch;
+}
+.offering {
+  text-align: center;
+  padding: 2.4rem;
+  background: rgba(255,255,255,0.6);
+  border-radius: .9rem;
+  box-shadow: var(--box-shadow);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.offering:hover { transform: translateY(-6px); }
+.offering .icon {
+  height: 6.6rem;
+  width: 6.6rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  background: linear-gradient(135deg, var(--accent), #ff9a3c);
+  color: #fff;
+  font-size: 2.2rem;
+  box-shadow: 0 8px 20px rgba(17,17,17,0.06);
+}
+.offering h4 { font-size: 1.6rem; color: var(--black); margin: .6rem 0 0 0; font-weight: 700; }
+
+@media (max-width: 768px) {
+  .offerings-grid { grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+}
 /*# sourceMappingURL=style.css.map */
+
+/* ------------------------------------------------------------------ */
+/* Panels with no background (user request: "those panels with no background") */
+/* This overrides card/panel backgrounds, shadows and borders so they appear
+   fully transparent while preserving internal elements (icons, images).
+   If you want a subset instead of all panels, tell me which ones and I
+   will scope the rules more narrowly. */
+.services .box-container .box,
+.about .box-container .box,
+.pricing .box-container .box,
+.contact .row .contact-card,
+.projects .box-container .box,
+.projects .box-container .box .content,
+.reviews .slide p,
+.offerings .offering,
+.box {
+  background: rgba(255,255,255,0.52) !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* keep offering icons and project images intact (only card containers become transparent) */
+
+/* ---------------- Glassy grey logo & related highlights ---------------- */
+/* Scope: header logo, contact-card pill, footer highlight and offering icons. */
+.header .logo .highlight,
+.header .logo .subline .and {
+  color: rgba(34,41,47,0.95) !important;
+  display: inline-block;
+  padding: .15rem .6rem;
+  background: rgba(255,255,255,0.28);
+  border-radius: .6rem;
+  border: 1px solid rgba(255,255,255,0.32);
+  backdrop-filter: blur(6px) saturate(120%);
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  box-shadow: 0 6px 18px rgba(11,18,31,0.04);
+  font-weight: 700;
+}
+
+.contact-card-header h3 {
+  background: linear-gradient(90deg, rgba(255,255,255,0.36), rgba(200,200,200,0.36)) !important;
+  color: rgba(24,28,33,0.95) !important;
+  padding: .8rem 2.4rem !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(255,255,255,0.28) !important;
+  backdrop-filter: blur(6px) !important;
+}
+
+.footer .credit span {
+  color: rgba(68,75,84,0.95) !important;
+  background: rgba(255,255,255,0.14);
+  padding: .2rem .6rem;
+  border-radius: .4rem;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* make offering icons glassy grey instead of orange */
+.offering .icon {
+  background: linear-gradient(135deg, rgba(230,230,235,0.95), rgba(200,205,210,0.95)) !important;
+  color: rgba(40,45,50,0.95) !important;
+  box-shadow: 0 8px 20px rgba(11,18,31,0.04) !important;
+}
+
+/* softer avatars in contact card */
+.contact-person .avatar {
+  background: linear-gradient(135deg, rgba(240,240,242,0.6), rgba(210,215,220,0.6)) !important;
+  color: rgba(34,41,47,0.9) !important;
+  box-shadow: none !important;
+}
+
+/* video portrait helpers */
+/* ---------------- Video portfolio (iPhone 9:16 vertical) ---------------- */
+.video-portfolio { background: transparent; }
+.video-portfolio .heading { color: rgba(10,10,10,0.95); }
+.videos-grid {
+  display: grid;
+  /* make cards a bit narrower so more appear per row */
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1rem; /* tighter gap for compactness */
+  align-items: start;
+}
+.video-card {
+  text-align: left;
+  padding: .6rem; /* small padding inside card */
+  background: transparent;
+}
+.video-card h4 {
+  margin-top: .4rem;
+  font-size: 1.45rem;
+  color: var(--black);
+  line-height: 1.15;
+}
+
+/* Aspect-ratio helper for portrait 9:16 (height / width * 100 = 16/9 * 100 = 177.7778%) */
+.ratio-9-16 {
+  position: relative;
+  width: 100%;
+  padding-top: 177.7778%; /* enforces 9:16 portrait */
+  overflow: hidden;
+  border-radius: .6rem;
+  background: #000; /* fallback poster background */
+  /* cap the height so very tall portrait videos don't push the page too far */
+  max-height: 55vh;
+}
+.ratio-9-16 video {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover; /* fill while preserving crop — keeps consistent framing */
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .videos-grid { grid-template-columns: 1fr; }
+}
+
